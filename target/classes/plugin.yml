@@ -1,0 +1,15 @@
+name: GetDown
+version: '1.0'
+main: at.kessaft.getdown.Main
+authors: [ KesSaft ]
+description: The old school GetDown Minigame
+website: kessaft.tk
+
+commands:
+  warp:
+    description: Admin teleport to gamemap
+  start:
+    description: Start new Game
+  getdown:
+    description: Main GetDown Command
+    aliases: [gd]
