@@ -24,6 +24,8 @@ public class Config {
 
         fileConfiguration = new YamlConfiguration();
         reload();
+        System.out.println("-- Loaded config");
+        System.out.println(toFileConfiguration().saveToString());
     }
 
     public File getFile() {
@@ -47,6 +49,7 @@ public class Config {
     }
 
     public void IfNotExist(String path, Object object){
-        fileConfiguration.set(path, object);
+        if (!fileConfiguration.contains(path) || fileConfiguration.getConfigurationSection(path) == null)
+            fileConfiguration.set(path, object);
     }
 }

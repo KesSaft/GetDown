@@ -4,3 +4,8 @@
 #   \___|\___| \__||___/ \___/  \_/\_/ |_||_|
 
 # Default Configurations
+
+lobby:
+  spawn: null
+options:
+  maxPlayers: 12
