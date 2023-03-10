@@ -1,6 +1,5 @@
 package at.kessaft.getdown.utils;
 
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -8,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Config {
-    private FileConfiguration fileConfiguration;
+    private YamlConfiguration fileConfiguration;
     private File file;
 
     public Config(String name, File path) {
@@ -24,11 +23,7 @@ public class Config {
         }
 
         fileConfiguration = new YamlConfiguration();
-        try {
-            fileConfiguration.load(file);
-        } catch (IOException | InvalidConfigurationException e) {
-            throw new RuntimeException(e);
-        }
+        reload();
     }
 
     public File getFile() {
@@ -48,11 +43,7 @@ public class Config {
     }
 
     public void reload(){
-        try {
-            fileConfiguration.load(file);
-        } catch (IOException | InvalidConfigurationException e) {
-            throw new RuntimeException(e);
-        }
+        fileConfiguration.loadConfiguration(file);
     }
 
     public void IfNotExist(String path, Object object){

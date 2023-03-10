@@ -54,7 +54,7 @@ public class MainCommand implements CommandExecutor {
                 }
 
                 shopLobbies.put(args[2].trim(), player.getLocation());
-                mc.set("shopLobbies", shopLobbies);
+                mc.createSection("shopLobbies", shopLobbies);
                 player.sendMessage(Prefixes.getSuccess() + "New ShopLobby created.");
 
                 main.getMapsConfig().save();
@@ -67,7 +67,7 @@ public class MainCommand implements CommandExecutor {
                 }
 
                 shopLobbies.remove(args[2].trim());
-                mc.set("shopLobbies", shopLobbies);
+                mc.createSection("shopLobbies", shopLobbies);
                 player.sendMessage(Prefixes.getSuccess() + "ShopLobby delete.");
 
                 main.getMapsConfig().save();
@@ -90,40 +90,40 @@ public class MainCommand implements CommandExecutor {
                 }
 
                 shopLobbies.put(args[2].trim(), shopLobby);
-                mc.set("shopLobbies", shopLobbies);
+                mc.createSection("shopLobbies", shopLobbies);
 
                 main.getMapsConfig().save();
             }
-        } else if (args.length >= 3 && args[0].equalsIgnoreCase("map")) {
+        } else if (args.length >= 3 && args[0].equalsIgnoreCase("jumpMap")) {
             LinkedHashMap<String, JumpMap> maps = new LinkedHashMap<>();
-            if ((LinkedHashMap<String, JumpMap>) mc.getConfigurationSection("jumpMaps") != null)
-                maps.putAll((LinkedHashMap<String, JumpMap>) mc.getConfigurationSection("jumpMaps"));
+            if (mc.getConfigurationSection("jumpMaps") != null)
+                maps.putAll((LinkedHashMap<String, JumpMap>) mc.getMapList("jumpMaps"));
 
             if (args[1].equalsIgnoreCase("create")) {
                 if (maps != null && !maps.isEmpty() && maps.keySet().contains(args[2].trim())) {
-                    sender.sendMessage(Prefixes.getError() + "A Map with this name already exists.");
+                    sender.sendMessage(Prefixes.getError() + "A jumpMap with this name already exists.");
                     return true;
                 }
 
                 maps.put(args[2].trim(), new JumpMap());
-                mc.set("jumpMaps", maps);
-                player.sendMessage(Prefixes.getSuccess() + "New map created.");
+                mc.createSection("jumpMaps", maps);
+                player.sendMessage(Prefixes.getSuccess() + "New jumpMap created.");
 
                 main.getMapsConfig().save();
             } else if (args[1].equalsIgnoreCase("delete")) {
                 if (!maps.isEmpty() && !maps.keySet().contains(args[2].trim())) {
-                    sender.sendMessage(Prefixes.getError() + "There does no map exist with this name.");
+                    sender.sendMessage(Prefixes.getError() + "There does no jumpMap exist with this name.");
                     return true;
                 }
 
                 maps.remove(args[2].trim());
-                mc.set("jumpMaps", maps);
-                player.sendMessage(Prefixes.getSuccess() + "Map delete.");
+                mc.createSection("jumpMaps", maps);
+                player.sendMessage(Prefixes.getSuccess() + "JumpMap got deleted.");
 
                 main.getMapsConfig().save();
             } else if (args.length >= 4 && args[1].equalsIgnoreCase("edit")) {
                 if (!maps.isEmpty() && !maps.isEmpty() && !maps.keySet().contains(args[2].trim())) {
-                    sender.sendMessage(Prefixes.getError() + "There does no map exist with this name.");
+                    sender.sendMessage(Prefixes.getError() + "There does no jumpMap exist with this name.");
                     return true;
                 }
 
@@ -195,7 +195,7 @@ public class MainCommand implements CommandExecutor {
                 }
 
                 maps.put(args[2].trim(), map);
-                    mc.set("jumpMaps", maps);
+                    mc.createSection("jumpMaps", maps);
 
                 main.getMapsConfig().save();
             }

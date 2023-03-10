@@ -31,7 +31,7 @@ public class MainCompleter implements TabCompleter {
             lore.add("help");
             lore.add("lobby");
             lore.add("shopLobby");
-            lore.add("map");
+            lore.add("jumpMap");
 
             return lore;
         } else if (args.length == 2 && args[0].equalsIgnoreCase("lobby")){
@@ -40,7 +40,7 @@ public class MainCompleter implements TabCompleter {
             lore.add("setSpawn");
 
             return lore;
-        } else if (args.length == 2 && (args[0].equalsIgnoreCase("map") || args[0].equalsIgnoreCase("shopLobby"))){
+        } else if (args.length == 2 && (args[0].equalsIgnoreCase("jumpMap") || args[0].equalsIgnoreCase("shopLobby"))){
             lore.clear();
 
             lore.add("create");
@@ -54,9 +54,11 @@ public class MainCompleter implements TabCompleter {
             lore = new ArrayList<String>(mc.getConfigurationSection("shopLobbies").getKeys(false));
 
             return lore;
-        } else if (args.length == 3 && args[0].equalsIgnoreCase("map") && (args[1].equalsIgnoreCase("delete") || args[1].equalsIgnoreCase("edit"))) {
+        } else if (args.length == 3 && args[0].equalsIgnoreCase("jumpMap") && (args[1].equalsIgnoreCase("delete") || args[1].equalsIgnoreCase("edit"))) {
             lore.clear();
 
+            System.out.println(mc.saveToString());
+            System.out.println(mc);
             lore = new ArrayList<String>(mc.getConfigurationSection("jumpMaps").getKeys(false));
 
             return lore;
@@ -66,7 +68,7 @@ public class MainCompleter implements TabCompleter {
             lore.add("setSpawn");
 
             return lore;
-        } else if (args.length == 4 && args[0].equalsIgnoreCase("map") && args[1].equalsIgnoreCase("edit")) {
+        } else if (args.length == 4 && args[0].equalsIgnoreCase("jumpMap") && args[1].equalsIgnoreCase("edit")) {
             lore.clear();
 
             lore.add("setSpawn");
